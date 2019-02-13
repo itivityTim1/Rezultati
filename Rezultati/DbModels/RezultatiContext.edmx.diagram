@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fda9b94afd254406a09ccbe216672731" Name="Diagram1">
+        <EntityTypeShape EntityType="RezultatiContext.Igrac" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RezultatiContext.Konferencija" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RezultatiContext.Tim" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RezultatiContext.UcinakIgraca" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RezultatiContext.Utakmica" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="RezultatiContext.FK_Igrac_Tim" ManuallyRouted="false" />
+        <AssociationConnector Association="RezultatiContext.FK_UcinakIgraca_Igrac" ManuallyRouted="false" />
+        <AssociationConnector Association="RezultatiContext.FK_Tim_Konferencija" ManuallyRouted="false" />
+        <AssociationConnector Association="RezultatiContext.FK_Utakmica_Tim" ManuallyRouted="false" />
+        <AssociationConnector Association="RezultatiContext.FK_Utakmica_Tim1" ManuallyRouted="false" />
+        <AssociationConnector Association="RezultatiContext.FK_UcinakIgraca_Utakmica" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

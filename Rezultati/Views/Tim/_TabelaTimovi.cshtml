@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Rezultati.Models.TimViewModel>
+
+<table id="tabela-timovi" class="table table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr class="mr-0">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="p-0 pr-1" align="right"><button type="button" class="btn btn-sm btn-primary mr-0" data-toggle="modal" data-target="#modal-dodaj">Dodaj novi tim</button></td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Naziv)</td>
+            <td>@Html.DisplayNameFor(m => m.Grad)</td>
+            <td>@Html.DisplayNameFor(m => m.Trener)</td>
+            <td>@Html.DisplayNameFor(m => m.Stadion)</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Naziv</td>
+                <td>@item.Grad</td>
+                <td>@item.Trener</td>
+                <td>@item.Stadion</td>
+                <td class="p-0 pr-1" align="right">
+                    <button type="button" class="btn btn-sm btn-success mr-0 edit-button" name="edit-button" data-id="@item.TimId" data-toggle="modal" data-target="#modal-izmijeni"><i class="far fa-edit"></i></button>
+                    <button type="button" class="btn btn-sm btn-danger mr-0"><i class="far fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Naziv)</td>
+            <td>@Html.DisplayNameFor(m => m.Grad)</td>
+            <td>@Html.DisplayNameFor(m => m.Trener)</td>
+            <td>@Html.DisplayNameFor(m => m.Stadion)</td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="modal fade" id="modal-izmijeni" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading">Izmijeni tim</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-9 text-center">
+                        @Html.Hidden("Id")
+                        <div class="md-form">
+                            <input type="text" id="naziv-edit" class="form-control">
+                            <label id="lbl-naziv" for="form1">Naziv</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="grad-edit" class="form-control">
+                            <label id="lbl-grad" for="form1">Grad</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="trener-edit" class="form-control">
+                            <label id="lbl-trener" for="form1">Trener</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="stadion-edit" class="form-control">
+                            <label id="lbl-stadion" for="form1">Stadion</label>
+                        </div>
+                        <div class="md-form">
+                            <label class="form-check-label">Konferencija:</label>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="custom-control custom-radio custom-control-inline mr-3">
+                            <input type="radio" class="custom-control-input" id="konferencija-edit-1" value="1" name="konferencija-edit">
+                            <label class="custom-control-label" for="konferencija-edit-1">Istok</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="konferencija-edit-2" value="2" name="konferencija-edit">
+                            <label class="custom-control-label" for="konferencija-edit-2">Zapad</label>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <button id="btn-dodaj" type="button" class="btn btn-sm btn-success" data-dismiss="modal">Potvrdi</button>
+                <button type="button" class="btn btn-sm btn-outline-success waves-effect" data-dismiss="modal">Otkaži</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#tabela-timovi').DataTable({
+            select: true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+    $(function () {
+        $('.edit-button').click(function () {
+            var data = {
+                id: $(this).attr('data-id')
+            };
+            $('#Id').val('')
+            $('#naziv-edit').val('')
+            $('#grad-edit').val('')
+            $('#trener-edit').val('')
+            $('#stadion-edit').val('')
+            $('#konferencija-edit-1').attr('checked', false)
+            $('#konferencija-edit-2').attr('checked', false)
+            $.get("/Tim/EditTeam", data, function (result) {
+                $('Id').val($('Id').val() + result.TimId)
+                $('#lbl-naziv').addClass("active")
+                $('#naziv-edit').val($('#naziv-edit').val() + result.Naziv)
+                $('#lbl-grad').addClass("active")
+                $('#grad-edit').val($('#grad-edit').val() + result.Grad)
+                $('#lbl-trener').addClass("active")
+                $('#trener-edit').val($('#trener-edit').val() + result.Trener)
+                $('#lbl-stadion').addClass("active")
+                $('#stadion-edit').val($('#stadion-edit').val() + result.Stadion)
+                if (result.KonferencijaId == 1)
+                    $('#konferencija-edit-1').attr('checked', true);
+                else
+                    $('#konferencija-edit-2').attr('checked', true);
+
+            });
+        });
+    });
+
+    $(function () {
+
+    });
+</script>
