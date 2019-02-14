@@ -154,6 +154,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IgracController.cs" />
     <Compile Include="Controllers\TimController.cs" />
     <Compile Include="DbModels\Igrac.cs">
       <DependentUpon>RezultatiContext.tt</DependentUpon>
@@ -188,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IgracViewModel.cs" />
     <Compile Include="Models\TimViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -350,6 +352,8 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Site\dodajIgraca.js" />
+    <Content Include="Scripts\Site\igraciTabela.js" />
     <Content Include="Scripts\Site\tabelaTimovi.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -381,6 +385,8 @@
     <Content Include="Views\Tim\Index.cshtml" />
     <Content Include="Views\Tim\List.cshtml" />
     <Content Include="Views\Tim\_TabelaTimovi.cshtml" />
+    <Content Include="Views\Igrac\List.cshtml" />
+    <Content Include="Views\Igrac\_TabelaIgraci.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

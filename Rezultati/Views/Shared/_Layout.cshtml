@@ -10,6 +10,8 @@
     @Styles.Render("~/Content/datatablesCss")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css" />
 
 </head>
 <body class="mt-0 pt-0">
@@ -25,8 +27,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">@Html.ActionLink("Timovi", "List", "Tim", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Igrači", "List", "Igrac", new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
@@ -106,7 +107,7 @@
                 <!-- Card -->
             </div>
         </div>
-        
+
         <footer class="mt-5">
             <hr />
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -117,9 +118,11 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/mdb")
     @Scripts.Render("~/Content/datatablesJs")
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @RenderSection("scripts", required: false)
 
-    <script>// Line
+    <script>
+    // Line
         var ctxL = document.getElementById("lineChart").getContext('2d');
         var myLineChart = new Chart(ctxL, {
             type: 'line',

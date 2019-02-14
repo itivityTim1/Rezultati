@@ -136,13 +136,13 @@ namespace Rezultati.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditTeam(string id,string Naziv, string Grad, string Trener, string Stadion, string Konferencija)
+        public ActionResult EditTeam(string Id,string Naziv, string Grad, string Trener, string Stadion, string Konferencija)
         {
             int konferencijaID = Convert.ToInt32(Konferencija);
-            int timID = Convert.ToInt32(id);
+            int timID = Convert.ToInt32(Id);
             using (var context = new RezultatiEntities())
             {
-                Tim izmijenjenTim = context.Tim.Find(timID)
+                Tim izmijenjenTim = context.Tim.Find(timID);
                     
                 izmijenjenTim.Naziv = Naziv;
                 izmijenjenTim.Grad = Grad;
@@ -151,6 +151,27 @@ namespace Rezultati.Controllers
                 izmijenjenTim.KonferencijaId = konferencijaID;
                 izmijenjenTim.Logo = new byte[0];
                 
+                context.SaveChanges();
+
+                var sviTimovi = context.Tim.Select(t => new TimViewModel
+                {
+                    TimId = t.TimId,
+                    Naziv = t.Naziv,
+                    Grad = t.Grad,
+                    Trener = t.Trener,
+                    Stadion = t.Stadion
+                }).ToList();
+
+                return PartialView("_TabelaTimovi", sviTimovi);
+            }
+        }
+
+        public ActionResult DeleteTeam(int id)
+        {
+            using(var context = new RezultatiEntities())
+            {
+                var timZaBrisanje = context.Tim.Find(id);
+                var brisanjeTime = context.Tim.Remove(timZaBrisanje);
                 context.SaveChanges();
 
                 var sviTimovi = context.Tim.Select(t => new TimViewModel

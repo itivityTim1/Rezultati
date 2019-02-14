@@ -1,0 +1,94 @@
+﻿@model Rezultati.DbModels.Igrac
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mt-3 mb-4">Svi igraci</h2>
+
+<div id="content"></div>
+
+<div class="modal fade" id="modal-dodaj-igraca" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading">Dodaj igrača</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-9 text-center">
+                        <div class="md-form">
+                            <input type="text" id="ime" class="form-control">
+                            <label for="form1">Ime</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="prezime" class="form-control">
+                            <label for="form1">Prezime</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="broj-dresa" class="form-control">
+                            <label for="form1">Broj dresa</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="datum-rodjenja" class="form-control datepicker">
+                            <label for="date-picker-example">Datum rođenja</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="mjesto-rodjenja" class="form-control">
+                            <label for="form1">Mjesto rođenja</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="tim" class="form-control">
+                            <label for="form1">Tim</label>
+                        </div>
+                        <div class="md-form">
+                            <label class="form-check-label">Pozicija:</label>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="custom-control custom-radio custom-control-inline mr-4">
+                            <input type="radio" class="custom-control-input" id="pozicija-pg" value="1" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-pg">Point guard</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-sg" value="SG" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-sg">Shooting guard</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-sf" value="SF" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-sf">Small forward</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-pf" value="PF" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-pf">Power forward</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-c" value="C" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-c">Center</label>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <button id="dodaj-igraca" type="button" class="btn btn-sm btn-info" data-dismiss="modal">Potvrdi</button>
+                <button type="button" class="btn btn-sm btn-outline-info waves-effect" data-dismiss="modal">Otkaži</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Site/dodajIgraca.js"></script>
+    <script src="~/Scripts/Site/igraciTabela.js"></script>
+}

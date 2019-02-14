@@ -1,0 +1,219 @@
+﻿@model IEnumerable<Rezultati.Models.IgracViewModel>
+
+
+<table id="tabela-igraci" class="table table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr class="mr-0">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="p-0 pr-1" align="right"><button type="button" class="btn btn-sm btn-primary mr-0" data-toggle="modal" data-target="#modal-dodaj-igraca">Dodaj novog igrača</button></td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.BrojDresa)</td>
+            <td>@Html.DisplayNameFor(m => m.Ime)</td>
+            <td>@Html.DisplayNameFor(m => m.Prezime)</td>
+            <td>@Html.DisplayNameFor(m => m.Pozicija)</td>
+            <td>@Html.DisplayNameFor(m => m.DatumRodjenja)</td>
+            <td>@Html.DisplayNameFor(m => m.MjestoRodjenja)</td>
+            <td>@Html.DisplayNameFor(m => m.Tim)</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BrojDresa</td>
+                <td>@item.Ime</td>
+                <td>@item.Prezime</td>
+                <td>@item.Pozicija</td>
+                <td>@item.DatumRodjenja</td>
+                <td>@item.MjestoRodjenja</td>
+                <td>@item.Tim</td>
+                <td class="p-0 pr-1" align="right">
+                    <button type="button" class="btn btn-sm btn-success mr-0 edit-button-igraci" name="edit-button" data-id="@item.IgracId" data-toggle="modal" data-target="#modal-izmijeni"><i class="far fa-edit"></i></button>
+                    <button type="button" class="btn btn-sm btn-danger mr-0 delete-button-igraci" data-id="@item.IgracId"><i class="far fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.BrojDresa)</td>
+            <td>@Html.DisplayNameFor(m => m.Ime)</td>
+            <td>@Html.DisplayNameFor(m => m.Prezime)</td>
+            <td>@Html.DisplayNameFor(m => m.Pozicija)</td>
+            <td>@Html.DisplayNameFor(m => m.DatumRodjenja)</td>
+            <td>@Html.DisplayNameFor(m => m.MjestoRodjenja)</td>
+            <td>@Html.DisplayNameFor(m => m.Tim)</td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="modal fade" id="modal-izmijeni" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading">Izmijeni tim</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-9 text-center">
+                        @Html.Hidden("Id-edit")
+                        <div class="md-form">
+                            <input type="text" id="ime-edit" class="form-control">
+                            <label id="lbl-ime-edit" for="ime-edit">Ime</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="prezime-edit" class="form-control">
+                            <label id="lbl-prezime-edit" for="prezime-edit">Prezime</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="broj-dresa-edit" class="form-control">
+                            <label id="lbl-broj-edit" for="broj-dresa-edit">Broj dresa</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="datum-rodjenja-edit" class="form-control datepicker">
+                            <label id="lbl-datum-edit" for="datum-rodjenja-edit">Datum rođenja</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="mjesto-rodjenja-edit" class="form-control">
+                            <label id="lbl-mjesto-edit" for="mjesto-rodjenja">Mjesto rođenja</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="tim-edit" class="form-control">
+                            <label id="lbl-tim-edit" for="tim-edit">Tim</label>
+                        </div>
+                        <div class="md-form">
+                            <label class="form-check-label">Pozicija:</label>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="custom-control custom-radio custom-control-inline mr-4">
+                            <input type="radio" class="custom-control-input" id="pozicija-pg-edit" value="1" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-pg">Point guard</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-sg-edit" value="SG" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-sg">Shooting guard</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-sf-edit" value="SF" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-sf">Small forward</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-pf-edit" value="PF" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-pf">Power forward</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="pozicija-c-edit" value="C" name="pozicija">
+                            <label class="custom-control-label" for="pozicija-c">Center</label>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <button id="btn-izmijeni" type="button" class="btn btn-sm btn-success" data-dismiss="modal">Potvrdi</button>
+                <button type="button" class="btn btn-sm btn-outline-success waves-effect" data-dismiss="modal">Otkaži</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const fpEdit = flatpickr("#datum-rodjenja-edit", {
+        onChange: function (selectedDates, dateStr, instance) {
+
+            var podaci = {
+
+                pocetniDatum: dateStr.substr(0, 10),
+                krajDatum: dateStr.substr(14, 10)
+
+            };
+        }
+    });
+
+    $(document).ready(function () {
+        $('#tabela-igraci').DataTable({
+            select: true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+    $('.edit-button-igraci').click(function () {
+        var data = {
+            id: $(this).attr('data-id')
+        };
+        $('#Id-edit').val('')
+        $("#ime-edit").val('');
+        $("#prezime-edit").val('');
+        $("#datum-rodjenja-edit").val('');
+        $("#mjesto-rodjenja-edit").val('');
+        $("#broj-dresa-edit").val('');
+        $("#tim-edit").val('');
+        $('#pozicija-pg-edit').attr('checked', false)
+        $('#pozicija-sg-edit').attr('checked', false)
+        $('#pozicija-sf-edit').attr('checked', false)
+        $('#pozicija-pf-edit').attr('checked', false)
+        $('#pozicija-c-edit').attr('checked', false)
+
+        $.get("/Igrac/EditPlayer", data, function (result) {
+            
+            $('#Id-edit').val($('#Id-edit').val() + result.IgracId)
+            $('#lbl-ime-edit').addClass("active")
+            $("#ime-edit").val($("#ime-edit").val() + result.Ime)
+            $('#lbl-prezime-edit').addClass("active")
+            $("#prezime-edit").val($("#prezime-edit").val() + result.Prezime)
+            $('#lbl-datum-edit').addClass("active")
+            $("#datum-rodjenja-edit").val($("#datum-rodjenja-edit").val() + result.DatumRodjenja)
+            $('#lbl-mjesto-edit').addClass("active")
+            $("#mjesto-rodjenja-edit").val($("#mjesto-rodjenja-edit").val() + result.MjestoRodjenja)
+            $('#lbl-broj-edit').addClass("active")
+            $("#broj-dresa-edit").val($("#broj-dresa-edit").val() + result.BrojDresa)
+            $('#lbl-tim-edit').addClass("active")
+            $("#tim-edit").val($("#tim-edit").val() + result.TimId)
+            if (result.Pozicija == 'PG')
+                $('#pozicija-pg-edit').attr('checked', true);
+            else if (result.Pozicija == 'SG')
+                $('#pozicija-sg-edit').attr('checked', true);
+            else if (result.Pozicija == 'SF')
+                $('#pozicija-sf-edit').attr('checked', true);
+            else if (result.Pozicija == 'PF')
+                $('#pozicija-pf-edit').attr('checked', true);
+            else if (result.Pozicija == 'C')
+                $('#pozicija-c-edit').attr('checked', true);
+        });
+    });
+        //$('#btn-izmijeni').click(function () {
+        //    var data = {
+        //        Id: $('#Id-edit').val(),
+        //        Naziv: $("#naziv-edit").val(),
+        //        Grad: $("#grad-edit").val(),
+        //        Trener: $("#trener-edit").val(),
+        //        Stadion: $("#stadion-edit").val(),
+        //        Konferencija: $("input[name='konferencija-edit']:checked").val()
+        //    };
+        //    $.post('/Tim/EditTeam', data, function (result) {
+        //        $('#content').empty();
+        //        $('#content').append(result);
+        //    });
+        //});
+    
+</script>
