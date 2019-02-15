@@ -138,14 +138,14 @@
 </div>
 
 <script>
-    const fpEdit = flatpickr("#datum-rodjenja-edit", {
+    var datum = new Date()
+    var fpEdit = flatpickr("#datum-rodjenja-edit", {
         onChange: function (selectedDates, dateStr, instance) {
 
             var podaci = {
 
                 pocetniDatum: dateStr.substr(0, 10),
-                krajDatum: dateStr.substr(14, 10)
-
+                krajDatum: dateStr.substr(14, 10),
             };
         }
     });
@@ -182,7 +182,14 @@
             $('#lbl-prezime-edit').addClass("active")
             $("#prezime-edit").val($("#prezime-edit").val() + result.Prezime)
             $('#lbl-datum-edit').addClass("active")
-            $("#datum-rodjenja-edit").val($("#datum-rodjenja-edit").val() + result.DatumRodjenja)
+            datum = result.DatumRodjenja.split('(')
+            var ms = datum[1].split(')')
+            var mss = ms[0]
+            var mssInt = parseInt(mss, 10)
+            var datetime = mssInt
+            var date = new Date(datetime);
+            var dat = date;
+            fpEdit.setDate(dat)
             $('#lbl-mjesto-edit').addClass("active")
             $("#mjesto-rodjenja-edit").val($("#mjesto-rodjenja-edit").val() + result.MjestoRodjenja)
             $('#lbl-broj-edit').addClass("active")
@@ -201,19 +208,38 @@
                 $('#pozicija-c-edit').attr('checked', true);
         });
     });
-        //$('#btn-izmijeni').click(function () {
-        //    var data = {
-        //        Id: $('#Id-edit').val(),
-        //        Naziv: $("#naziv-edit").val(),
-        //        Grad: $("#grad-edit").val(),
-        //        Trener: $("#trener-edit").val(),
-        //        Stadion: $("#stadion-edit").val(),
-        //        Konferencija: $("input[name='konferencija-edit']:checked").val()
-        //    };
-        //    $.post('/Tim/EditTeam', data, function (result) {
-        //        $('#content').empty();
-        //        $('#content').append(result);
-        //    });
-        //});
-    
+</script>
+
+<script>
+    $('#btn-izmijeni').click(function () {
+        var data = {
+            Id: $('#Id-edit').val(),
+            Ime: $("#ime-edit").val(),
+            Prezime: $("#prezime-edit").val(),
+            DatumRodjenja: $("#datum-rodjenja-edit").val(),
+            MjestoRodjenja: $("#mjesto-rodjenja-edit").val(),
+            BrojDresa: $("#broj-dresa-edit").val(),
+            Tim: $("#tim-edit").val(),
+            Pozicija: $("input[name='pozicija']:checked").val()
+        };
+        $.post('/Igrac/EditPlayer', data, function (result) {
+            $('#content').empty();
+            $('#content').append(result);
+            
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $('.delete-button-igraci').click(function () {
+            var data = {
+                id: $(this).attr('data-id')
+            };
+
+            $.get('/Igrac/DeleteTeam', data, function (result) {
+                $('#content').empty();
+                $('#content').append(result);
+            });
+        });
+    });
 </script>

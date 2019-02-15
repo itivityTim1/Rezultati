@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="Models\IgracViewModel.cs" />
     <Compile Include="Models\TimViewModel.cs" />
+    <Compile Include="Models\UtakmicaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

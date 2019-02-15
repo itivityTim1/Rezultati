@@ -94,5 +94,64 @@ namespace Rezultati.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult EditPlayer(int Id, string Ime, string Prezime, string DatumRodjenja, string MjestoRodjenja, short BrojDresa, int Tim, string Pozicija)
+        {
+            DateTime datumRodjenja = Convert.ToDateTime(DatumRodjenja);
+            using (var context = new RezultatiEntities())
+            {
+                Igrac izmijeniIgraca = context.Igrac.Find(Id);
+                izmijeniIgraca.Ime = Ime;
+                izmijeniIgraca.Prezime = Prezime;
+                izmijeniIgraca.DatumRodjenja = datumRodjenja;
+                izmijeniIgraca.MjestoRodjenja = MjestoRodjenja;
+                izmijeniIgraca.BrojDresa = BrojDresa;
+                izmijeniIgraca.TimId = Tim;
+                izmijeniIgraca.Pozicija = Pozicija;
+                izmijeniIgraca.Slika = new byte[0];
+                context.SaveChanges();
+
+                var sviIgraci = context.Igrac.Select(i => new IgracViewModel
+                {
+                    IgracId = i.IgracId,
+                    Ime = i.Ime,
+                    Prezime = i.Prezime,
+                    DatumRodjenja = i.DatumRodjenja,
+                    MjestoRodjenja = i.MjestoRodjenja,
+                    BrojDresa = i.BrojDresa,
+                    Pozicija = i.Pozicija,
+                    TimId = i.TimId,
+                    Tim = i.Tim.Naziv
+                }).ToList();
+
+                return PartialView("_TabelaIgraci", sviIgraci);
+            }
+        }
+
+        public ActionResult DeletePlayer(int id)
+        {
+            using (var context = new RezultatiEntities())
+            {
+                var igracZaBrisanje = context.Igrac.Find(id);
+                var brisanjeIgraca = context.Igrac.Remove(igracZaBrisanje);
+                context.SaveChanges();
+
+                var sviIgraci = context.Igrac.Select(i => new IgracViewModel
+                {
+                    IgracId = i.IgracId,
+                    Ime = i.Ime,
+                    Prezime = i.Prezime,
+                    DatumRodjenja = i.DatumRodjenja,
+                    MjestoRodjenja = i.MjestoRodjenja,
+                    BrojDresa = i.BrojDresa,
+                    Pozicija = i.Pozicija,
+                    TimId = i.TimId,
+                    Tim = i.Tim.Naziv
+                }).ToList(); ;
+
+                return PartialView("_TabelaIgraci", sviIgraci);
+            }
+        }
+
     }
 }
