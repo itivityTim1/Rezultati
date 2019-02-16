@@ -64,7 +64,7 @@
             </div>
 
             <div class="modal-footer justify-content-center">
-                <button id="dodaj-igraca" type="button" class="btn btn-sm btn-info" data-dismiss="modal">Potvrdi</button>
+                <button id="potvrdi" type="button" class="btn btn-sm btn-info" data-dismiss="modal">Potvrdi</button>
                 <button type="button" class="btn btn-sm btn-outline-info waves-effect" data-dismiss="modal">Otkaži</button>
             </div>
         </div>
@@ -89,6 +89,23 @@
                 gost += '<option selected>Gostujući tim</option>';
                 $('#domaci-tim').html(domaci);
                 $('#gostujuci-tim').html(gost);
+            });
+        });
+
+        $('#potvrdi').click(function () {
+            var data = {
+                datum = $('#datum-odigravanja').val(),
+                kolo = $('#kolo').val(),
+                domaciId = $('#domaci-tim').val(),
+                gostId = $('#gostujuci-tim').val()
+            };
+            $('#datum-odigravanja').val('');
+            $('#kolo').val('');
+            $('#domaci-tim').val(''),
+            $('#gostujuci-tim').val('')
+            $.get('/Utakmica/AddGame', data, function (result) {
+                $('#tabela').empty();
+                $('#tabela').append(result)
             });
         });
     </script>
