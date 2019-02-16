@@ -156,6 +156,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IgracController.cs" />
     <Compile Include="Controllers\TimController.cs" />
+    <Compile Include="Controllers\UtakmicaController.cs" />
     <Compile Include="DbModels\Igrac.cs">
       <DependentUpon>RezultatiContext.tt</DependentUpon>
     </Compile>
@@ -355,6 +356,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Site\dodajIgraca.js" />
     <Content Include="Scripts\Site\igraciTabela.js" />
+    <Content Include="Scripts\Site\pregled.js" />
     <Content Include="Scripts\Site\tabelaTimovi.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -388,6 +390,8 @@
     <Content Include="Views\Tim\_TabelaTimovi.cshtml" />
     <Content Include="Views\Igrac\List.cshtml" />
     <Content Include="Views\Igrac\_TabelaIgraci.cshtml" />
+    <Content Include="Views\Utakmica\Pregled.cshtml" />
+    <Content Include="Views\Utakmica\_Utakmice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

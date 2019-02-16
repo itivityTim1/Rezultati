@@ -22,5 +22,7 @@ namespace Rezultati.Models
         public int TrecaCetvrtinaGost { get; set; }
         public int CetvrtaCetvrtinaDomaci { get; set; }
         public int CetvrtaCetvrtinaGost { get; set; }
+        public int PoeniDomaci { get; set; }
+        public int PoeniGost { get; set; }
     }
 }

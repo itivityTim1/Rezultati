@@ -26,6 +26,9 @@ namespace Rezultati
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/popper").Include(
+                      "~/Scripts/umd/popper.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
@@ -43,6 +46,9 @@ namespace Rezultati
             bundles.Add(new ScriptBundle("~/Content/datatablesJs").Include(
                       "~/Scripts/js/addons/datatables.js",
                       "~/Scripts/js/addons/datatables-select.js"));
+            bundles.Add(new ScriptBundle("~/Content/charts").Include(
+                      "~/Scripts/js/modules/chart.js",
+                      "~/Scripts/js/modules/enhanced-modals.js"));
 
             var nullBulider = new NullBuilder();
             var nullOrderer = new NullOrderer();
