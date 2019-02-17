@@ -18,13 +18,38 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td class="p-0"></td>
-            <td class="p-0 pt-2" align="right">Denver Nuggets</td>
-            <td class="p-0 pt-2" align="center">54 : 55</td>
-            <td class="p-0 pt-2">Boston Celtics</td>
-            <td class="p-0 pr-1" align="right"><button type="button" class="btn btn-sm btn-success mr-0 odigraj" data-toggle="modal" data-target="#modal-dodaj-igraca">Odigraj</button></td>
-        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="p-0"></td>
+                <td class="p-0 pt-2" align="right">@item.DomaciTim</td>
+                <td class="p-0 pt-2" align="center">@item.PoeniDomaci : @item.PoeniGost</td>
+                <td class="p-0 pt-2">@item.GostujuciTim</td>
+                <td class="p-0 pr-1" align="right"><button type="button" id="odigraj" class="btn btn-sm btn-success mr-0 odigraj" data-id="@item.UtakmicaId" data-toggle="modal" data-target="#modal-odigraj">Odigraj</button>
+                <button type="button" class="btn btn-sm btn-light-blue mr-0 igraci" data-id="#igraci-@item.UtakmicaId">Statistike igraca</button></td>
+            </tr>
+            <tbody class="igraci-stat" id="igraci-@item.UtakmicaId">
+                <tr>
+                    <td class="p-2 blue-grey lighten-4" colspan="5">@item.DomaciTim</td>
+                </tr>
+                <tr>
+                    <td class="p-0" colspan="4">a</td>
+                    <td class="p-0" align="right" colspan="1">a</td>
+                </tr>
+                <tr>
+                    <td class="p-0" colspan="4">a</td>
+                    <td class="p-0" align="right" colspan="1">a</td>
+                </tr>
+                <tr>
+                    <td class="p-2 blue-grey lighten-4" colspan="5">@item.GostujuciTim</td>
+                </tr>
+                <tr>
+                    <td class="p-0" colspan="4">a</td>
+                    <td class="p-0" align="right" colspan="1">a</td>
+                </tr>
+            </tbody>
+        }
+
     </tbody>
 
     <tfoot>
@@ -40,3 +65,187 @@
 
 
 
+<div class="modal fade" id="modal-statistike" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading"></p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="domaci-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                           aria-selected="true">Timovi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="gost-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                           aria-selected="false">Igrači</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        
+
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="posalji-ucinak" type="button" class="btn btn-sm btn-info" data-dismiss="modal">Potvrdi</button>
+                    <button type="button" class="btn btn-sm btn-outline-info waves-effect" data-dismiss="modal">Otkaži</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="modal-odigraj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading"></p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    @Html.Hidden("ID")
+                    <div class="col-6 mt-4">
+                        <h3 id="domaci-tim"></h3>
+                        <div class="md-form">
+                            <input type="number" id="prva-d" class="form-control poeni-domaci">
+                            <label class="lbl-p" for="prva-d">Prva četvrtina</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="druga-d" class="form-control poeni-domaci">
+                            <label class="lbl-p" for="druga-d">Druga četvrtina</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="treca-d" class="form-control poeni-domaci">
+                            <label class="lbl-p" for="treca-d">Treća četvrtina</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="cetvrta-d" class="form-control poeni-domaci">
+                            <label class="lbl-p" for="cetvrta-d">Četvrta četvrtina</label>
+                        </div>
+                        <h4 id="ukupno-domaci"></h4>
+                    </div>
+                    <div class="col-6 mt-4">
+                        <h3 id="gostujuci-tim"></h3>
+                        <div class="md-form">
+                            <input type="number" id="prva-g" class="form-control poeni-gost">
+                            <label class="lbl-p" for="prva-g">Prva četvrtina</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="druga-g" class="form-control poeni-gost">
+                            <label class="lbl-p" for="druga-g">Druga četvrtina</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="treca-g" class="form-control poeni-gost">
+                            <label class="lbl-p" for="treca-g">Treća četvrtina</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="cetvrta-g" class="form-control poeni-gost">
+                            <label class="lbl-p" for="cetvrta-g">Četvrta četvrtina</label>
+                        </div>
+                        <h4 id="ukupno-gost"></h4>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="posalji-ucinak" type="button" class="btn btn-sm btn-info" data-dismiss="modal">Potvrdi</button>
+                    <button type="button" class="btn btn-sm btn-outline-info waves-effect" data-dismiss="modal">Otkaži</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+    $('#odigraj').click(function () {
+        var data = {
+            Id: $(this).attr('data-id')
+        }
+        $('#ID').val('')
+        $('#prva-d').val('')
+        $('#druga-d').val('')
+        $('#treca-d').val('')
+        $('#cetvrta-d').val('')
+        $('#prva-g').val('')
+        $('#druga-g').val('')
+        $('#treca-g').val('')
+        $('#cetvrta-g').val('')
+        $.get('/Utakmica/Result', data, function (result) {
+
+            $('.lbl-p').addClass("active")
+            $('#ID').val($('#ID').val() + result.UtakmicaId)
+            $('#domaci-tim').html(result.DomaciTim)
+            $('#prva-d').val($('#prva-d').val() + result.PrvaCetvrtinaDomaci)
+            $('#druga-d').val($('#druga-d').val() + result.DrugaCetvrtinaDomaci)
+            $('#treca-d').val($('#treca-d').val() + result.TrecaCetvrtinaDomaci)
+            $('#cetvrta-d').val($('#cetvrta-d').val() + result.CetvrtaCetvrtinaDomaci)
+            $('#gostujuci-tim').html(result.GostujuciTim)
+            $('#prva-g').val($('#prva-g').val() + result.PrvaCetvrtinaGost)
+            $('#druga-g').val($('#druga-g').val() + result.DrugaCetvrtinaGost)
+            $('#treca-g').val($('#treca-g').val() + result.TrecaCetvrtinaGost)
+            $('#cetvrta-g').val($('#cetvrta-g').val() + result.CetvrtaCetvrtinaGost)
+            $('#ukupno-domaci').html(result.PoeniDomaci)
+            $('#ukupno-gost').html(result.PoeniGost)
+
+        });
+    });
+
+    $('#posalji-ucinak').click(function () {
+        var data = {
+            Id: $('#ID').val(),
+            PrvaDomaci: $('#prva-d').val(),
+            DrugaDomaci: $('#druga-d').val(),
+            TrecaDomaci: $('#treca-d').val(),
+            CetvrtaDomaci: $('#cetvrta-d').val(),
+            PrvaGost:$('#prva-g').val(),
+            DrugaGost: $('#druga-g').val(),
+            TrecaGost: $('#treca-g').val(),
+            CetvrtaGost: $('#cetvrta-g').val()
+        };
+
+        $.post('/Utakmica/Result', data, function (result) {
+            $('#tabela').empty();
+            $('#tabela').append(result)
+        });
+    });
+
+    $('.poeni-domaci').change(function () {
+        $('#ukupno-domaci').html(parseInt($('#prva-d').val(), 10) +
+            parseInt($('#druga-d').val(), 10) + parseInt($('#treca-d').val(), 10) + parseInt($('#cetvrta-d').val(), 10))
+    });
+    $('.poeni-gost').change(function () {
+        $('#ukupno-gost').html(parseInt($('#prva-g').val(), 10) +
+            parseInt($('#druga-g').val(), 10) + parseInt($('#treca-g').val(), 10) + parseInt($('#cetvrta-g').val(), 10))
+    });
+
+    $('.igraci').click(function () {
+        var s = $(this).attr('data-id')
+        $(s).toggle()
+    });
+
+    $(document).ready(function () {
+        $('.igraci-stat').toggle('click')
+    })
+</script>

@@ -31,7 +31,7 @@
     <div class="modal-dialog modal-notify modal-info" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <p class="heading">Dodaj igrača</p>
+                <p class="heading">Dodaj utakmicu</p>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
@@ -44,7 +44,7 @@
                     <div class="col-2"></div>
                     <div class="col-9 text-center">
                         <div class="md-form">
-                            <input type="text" id="kolo" class="form-control">
+                            <input type="" id="kolo" class="form-control">
                             <label for="kolo">Kolo</label>
                         </div>
                         <select id="domaci-tim" class="browser-default custom-select mb-4" style="margin-left: -50px">
@@ -77,16 +77,37 @@
     {
     <script src="~/Scripts/Site/pregled.js"></script>
     <script>
+        var fpDatumOdigravanja = flatpickr("#datum-odigravanja", {
+            defaultDate: new Date(),
+            onChange: function (selectedDates, dateStr, instance) {
+
+                var podaci = {
+
+                    pocetniDatum: dateStr.substr(0, 10),
+                    krajDatum: dateStr.substr(14, 10),
+                };
+            }
+        });
+        $('#kalendar').change(function () {
+            var data = {
+                datum: $(this).val()
+            };
+            $.get('/Utakmica/ChangeDate', data, function (result) {
+                $('#tabela').empty();
+                $('#tabela').append(result);
+            });
+        });
+    
         $(document).ready(function () {
             $.get('/Utakmica/ListaTImova', '', function (result) {
                 var domaci = '';
                 var gost = '';
                 $.each(result, function (index, item) {
-                    domaci += '<option value="' + item.Id + '" disabled selected>' + item.Naziv + '</option>';
-                    gost += '<option value="' + item.Id + '" disabled selected>' + item.Naziv + '</option>';
+                    domaci += '<option value="' + item.Id + '">' + item.Naziv + '</option>';
+                    gost += '<option value="' + item.Id + '">' + item.Naziv + '</option>';
                 });
-                domaci += '<option selected>Domaći tim</option>';
-                gost += '<option selected>Gostujući tim</option>';
+                domaci += '<option disabled selected>Domaći tim</option>';
+                gost += '<option disabled selected>Gostujući tim</option>';
                 $('#domaci-tim').html(domaci);
                 $('#gostujuci-tim').html(gost);
             });
@@ -94,10 +115,10 @@
 
         $('#potvrdi').click(function () {
             var data = {
-                datum = $('#datum-odigravanja').val(),
-                kolo = $('#kolo').val(),
-                domaciId = $('#domaci-tim').val(),
-                gostId = $('#gostujuci-tim').val()
+                datum : $('#datum-odigravanja').val(),
+                kolo : $('#kolo').val(),
+                domaciId : $('#domaci-tim').val(),
+                gostId : $('#gostujuci-tim').val()
             };
             $('#datum-odigravanja').val('');
             $('#kolo').val('');
