@@ -50,21 +50,7 @@ namespace Rezultati
                       "~/Scripts/js/modules/chart.js",
                       "~/Scripts/js/modules/enhanced-modals.js"));
 
-            var nullBulider = new NullBuilder();
-            var nullOrderer = new NullOrderer();
-
-            BundleResolver.Current = new CustomBundleResolver();
-            var commonStyleBundle = new CustomStyleBundle("~/Content/sass");
-            var dataTablesBundle = new CustomStyleBundle("~/Content/datatablesSass");
-
-            dataTablesBundle.Include("~/Content/scss/addons/_datatables.scss");
-            dataTablesBundle.Include("~/Content/scss/addons/_datatables-select.scss");
-            dataTablesBundle.Include("~/Content/scss/addons/_directives.scss");
-            dataTablesBundle.Orderer = nullOrderer;
-            commonStyleBundle.Include("~/Content/scss/mdb.scss");
-            commonStyleBundle.Orderer = nullOrderer;
-            bundles.Add(commonStyleBundle);
-            bundles.Add(dataTablesBundle);
+            
         }
     }
 }

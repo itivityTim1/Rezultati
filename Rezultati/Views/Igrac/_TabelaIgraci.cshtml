@@ -105,24 +105,24 @@
                         <br />
                         <br />
                         <div class="custom-control custom-radio custom-control-inline mr-4">
-                            <input type="radio" class="custom-control-input" id="pozicija-pg-edit" value="1" name="pozicija">
-                            <label class="custom-control-label" for="pozicija-pg">Point guard</label>
+                            <input type="radio" class="custom-control-input" id="pozicija-pg-edit" value="PG" name="pozicija-edit">
+                            <label class="custom-control-label" for="pozicija-pg-edit">Point guard</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="pozicija-sg-edit" value="SG" name="pozicija">
-                            <label class="custom-control-label" for="pozicija-sg">Shooting guard</label>
+                            <input type="radio" class="custom-control-input" id="pozicija-sg-edit" value="SG" name="pozicija-edit">
+                            <label class="custom-control-label" for="pozicija-sg-edit">Shooting guard</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="pozicija-sf-edit" value="SF" name="pozicija">
-                            <label class="custom-control-label" for="pozicija-sf">Small forward</label>
+                            <input type="radio" class="custom-control-input" id="pozicija-sf-edit" value="SF" name="pozicija-edit">
+                            <label class="custom-control-label" for="pozicija-sf-edit">Small forward</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="pozicija-pf-edit" value="PF" name="pozicija">
-                            <label class="custom-control-label" for="pozicija-pf">Power forward</label>
+                            <input type="radio" class="custom-control-input" id="pozicija-pf-edit" value="PF" name="pozicija-edit">
+                            <label class="custom-control-label" for="pozicija-pf-edit">Power forward</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="pozicija-c-edit" value="C" name="pozicija">
-                            <label class="custom-control-label" for="pozicija-c">Center</label>
+                            <input type="radio" class="custom-control-input" id="pozicija-c-edit" value="C" name="pozicija-edit">
+                            <label class="custom-control-label" for="pozicija-c-edit">Center</label>
                         </div>
                     </div>
                     <div class="col-1"></div>
@@ -220,7 +220,7 @@
             MjestoRodjenja: $("#mjesto-rodjenja-edit").val(),
             BrojDresa: $("#broj-dresa-edit").val(),
             Tim: $("#tim-edit").val(),
-            Pozicija: $("input[name='pozicija']:checked").val()
+            Pozicija: $("input[name='pozicija-edit']:checked").val()
         };
         $.post('/Igrac/EditPlayer', data, function (result) {
             $('#content').empty();
