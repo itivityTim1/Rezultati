@@ -25,28 +25,32 @@
                 <td class="p-0 pt-2" align="right">@item.DomaciTim</td>
                 <td class="p-0 pt-2" align="center">@item.PoeniDomaci : @item.PoeniGost</td>
                 <td class="p-0 pt-2">@item.GostujuciTim</td>
-                <td class="p-0 pr-1" align="right"><button type="button" id="odigraj" class="btn btn-sm btn-success mr-0 odigraj" data-id="@item.UtakmicaId" data-toggle="modal" data-target="#modal-odigraj">Odigraj</button>
-                <button type="button" class="btn btn-sm btn-light-blue mr-0 igraci" data-id="#igraci-@item.UtakmicaId">Statistike igraca</button></td>
+                <td class="p-0 pr-1" align="right">
+                    <button type="button" id="odigraj" class="btn btn-sm btn-success mr-0 odigraj" data-id="@item.UtakmicaId" data-toggle="modal" data-target="#modal-odigraj">Odigraj</button>
+                    <button type="button" class="btn btn-sm btn-light-blue mr-0 igraci" data-id="#igraci-@item.UtakmicaId">Igraci</button>
+                </td>
             </tr>
             <tbody class="igraci-stat" id="igraci-@item.UtakmicaId">
                 <tr>
                     <td class="p-2 blue-grey lighten-4" colspan="5">@item.DomaciTim</td>
                 </tr>
-                <tr>
-                    <td class="p-0" colspan="4">a</td>
-                    <td class="p-0" align="right" colspan="1">a</td>
-                </tr>
-                <tr>
-                    <td class="p-0" colspan="4">a</td>
-                    <td class="p-0" align="right" colspan="1">a</td>
-                </tr>
+                @foreach (var i in item.IgraciDomaci)
+                {
+                    <tr>
+                        <td class="p-0" colspan="4">@i.BrojDresa @i.Ime @i.Prezime</td>
+                        <td class="p-0" align="right" colspan="1"><a data-toggle="modal" data-target="#modal-statistika" class="unos-statistike" data-utakmica="@item.UtakmicaId" data-id="@i.IgracId">Unesi statistiku za igraca</a></td>
+                    </tr>
+                }
                 <tr>
                     <td class="p-2 blue-grey lighten-4" colspan="5">@item.GostujuciTim</td>
                 </tr>
-                <tr>
-                    <td class="p-0" colspan="4">a</td>
-                    <td class="p-0" align="right" colspan="1">a</td>
-                </tr>
+                @foreach (var i in item.IgraciGosti)
+                {
+                    <tr>
+                        <td class="p-0" colspan="4">@i.BrojDresa @i.Ime @i.Prezime</td>
+                        <td class="p-0" align="right" colspan="1"><a data-toggle="modal" data-target="#modal-statistika" class="unos-statistike" data-utakmica="@item.UtakmicaId" data-id="@i.IgracId">Unesi statistiku za igraca</a></td>
+                    </tr>
+                }
             </tbody>
         }
 
@@ -63,49 +67,6 @@
     </tfoot>
 </table>
 
-
-
-<div class="modal fade" id="modal-statistike" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true" data-backdrop="false">
-    <div class="modal-dialog modal-notify modal-info" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <p class="heading"></p>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="white-text">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="domaci-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                           aria-selected="true">Timovi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="gost-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                           aria-selected="false">Igrači</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        
-
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button id="posalji-ucinak" type="button" class="btn btn-sm btn-info" data-dismiss="modal">Potvrdi</button>
-                    <button type="button" class="btn btn-sm btn-outline-info waves-effect" data-dismiss="modal">Otkaži</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
 
 
 <div class="modal fade" id="modal-odigraj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -175,11 +136,99 @@
 </div>
 
 
+<div class="modal fade" id="modal-statistika" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading"></p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    @Html.Hidden("StatId")
+                    <div class="col-6 mt-4">
+                        <h3 id="ime-igraca" class="mb-2"></h3>
+                        <div class="md-form">
+                            <input type="number" id="minute" class="form-control">
+                            <label class="lbl-stat" for="minute">Minute</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="poeni" class="form-control">
+                            <label class="lbl-stat" for="poeni">Poeni</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="asistencije" class="form-control">
+                            <label class="lbl-stat" for="asistencije">Asistencije</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="skokovi" class="form-control">
+                            <label class="lbl-stat" for="skokovi">Skokovi</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="ukradene" class="form-control">
+                            <label class="lbl-stat" for="ukradene">Ukradene lopte</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="blokovi" class="form-control">
+                            <label class="lbl-stat" for="blokovi">Blokovi</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="licne" class="form-control">
+                            <label class="lbl-stat" for="licne">Licne greske</label>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-4">
+                        <div class="md-form">
+                            <input type="number" id="izgubljene" class="form-control">
+                            <label class="lbl-stat" for="izgubljene">Izgubljene lopte</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="za-dva" class="form-control">
+                            <label class="lbl-stat" for="za-dva">Pokusaji za 2</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="pogodjeni-dva" class="form-control">
+                            <label class="lbl-stat" for="pogodjeni-dva">Pogoci za 2</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="za-tri" class="form-control">
+                            <label class="lbl-stat" for="za-tri">Pokusaji za 3</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="pogodjeni-tri" class="form-control">
+                            <label class="lbl-stat" for="pogodjeni-tri">Pogodjeni za 3</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="slobodna" class="form-control">
+                            <label class="lbl-stat" for="slobodna">Slobodna bacanja</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="number" id="pogodjena-slobodna" class="form-control">
+                            <label class="lbl-stat" for="pogodjena-slobodna">Pogodjena slobodna bacanja</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button id="posalji-stat" type="button" class="btn btn-sm btn-info" data-dismiss="modal">Potvrdi</button>
+                    <button type="button" class="btn btn-sm btn-outline-info waves-effect" data-dismiss="modal">Otkaži</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 
 
 
 <script>
-    $('#odigraj').click(function () {
+    $('.odigraj').click(function () {
         var data = {
             Id: $(this).attr('data-id')
         }
@@ -240,6 +289,9 @@
             parseInt($('#druga-g').val(), 10) + parseInt($('#treca-g').val(), 10) + parseInt($('#cetvrta-g').val(), 10))
     });
 
+</script>
+<script>
+
     $('.igraci').click(function () {
         var s = $(this).attr('data-id')
         $(s).toggle()
@@ -248,4 +300,70 @@
     $(document).ready(function () {
         $('.igraci-stat').toggle('click')
     })
+
+    $('.unos-statistike').click(function () {
+        var data = {
+            IgracId: $(this).attr('data-id'),
+            UtakmicaId: $(this).attr('data-utakmica')
+        };
+
+        $('#StatId').val('')
+        $('#minute').val('')
+        $('#blokovi').val('')
+        $('#asistencije').val('')
+        $('#poeni').val('')
+        $('#skokovi').val('')
+        $('#izgubljene').val('')
+        $('#licne').val('')
+        $('#pogodjena-slobodna').val('')
+        $('#pogodjeni-dva').val('')
+        $('#pogodjeni-tri').val('')
+        $('#za-dva').val('')
+        $('#slobodna').val('')
+        $('#za-tri').val('')
+        $('#ukradene').val('')
+
+        $.get('/Utakmica/PlayerStat', data, function (result) {
+
+            $('.lbl-stat').addClass("active")
+            $('#ime-igraca').html(result.ImeIgraca)
+            $('#StatId').val($('#StatId').val() + result.UcinakId)
+            $('#minute').val($('#minute').val() + result.BrojMinuta)
+            $('#blokovi').val($('#blokovi').val() + result.Blokovi)
+            $('#asistencije').val($('#asistencije').val() + result.BrojAsistencija)
+            $('#poeni').val($('#poeni').val() + result.BrojPoena)
+            $('#skokovi').val($('#skokovi').val() + result.BrojSkokova)
+            $('#izgubljene').val($('#izgubljene').val() + result.IzgubljeneLopte)
+            $('#licne').val($('#licne').val() + result.LicneGreske)
+            $('#pogodjena-slobodna').val($('#pogodjena-slobodna').val() + result.PogodjenaBacanja)
+            $('#pogodjeni-dva').val($('#pogodjeni-dva').val() + result.PogodjeniSutevi)
+            $('#pogodjeni-tri').val($('#pogodjeni-tri').val() + result.PogodjeniZaTri)
+            $('#za-dva').val($('#za-dva').val() + result.PokusajiIzIgre)
+            $('#slobodna').val($('#slobodna').val() + result.SlobodnaBacanja)
+            $('#za-tri').val($('#za-tri').val() + result.SuteviZaTri)
+            $('#ukradene').val($('#ukradene').val() + result.UkradeneLopte)
+        });
+    });
+
+    $('#posalji-stat').click(function () {
+        var data = {
+            UcinakId: $('#StatId').val(),
+            Blokovi: $('#blokovi').val(),
+            BrojAsistencija: $('#asistencije').val(),
+            BrojMinuta: $('#minute').val(),
+            BrojPoena: $('#poeni').val(),
+            BrojSkokova: $('#skokovi').val(),
+            IzgubljeneLopte: $('#izgubljene').val(),
+            LicneGreske: $('#licne').val(),
+            PogodjenaBacanja: $('#pogodjena-slobodna').val(),
+            PogodjeniSutevi: $('#pogodjeni-dva').val(),
+            PogodjeniZaTri: $('#pogodjeni-tri').val(),
+            PokusajiIzIgre: $('#za-dva').val(),
+            SlobodnaBacanja: $('#slobodna').val(),
+            SuteviZaTri: $('#za-tri').val(),
+            UkradeneLopte: $('#ukradene').val()
+        };
+        $.post('/Utakmica/AddStat', data)
+    });
+
 </script>

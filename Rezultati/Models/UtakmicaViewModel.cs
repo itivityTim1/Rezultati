@@ -24,5 +24,7 @@ namespace Rezultati.Models
         public int CetvrtaCetvrtinaGost { get; set; }
         public int PoeniDomaci { get; set; }
         public int PoeniGost { get; set; }
+        public List<IgracViewModel> IgraciDomaci { get; set; }
+        public List<IgracViewModel> IgraciGosti { get; set; }
     }
 }

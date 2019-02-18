@@ -59,6 +59,7 @@ namespace Rezultati.Controllers
                     PrimljeniKosevi = Convert.ToInt32(t.PrimljeniKoseviDomaci) + Convert.ToInt32(t.PrimljeniKoseviGostujuci),
                     ProcentPobijeda = Convert.ToDouble(t.DomacePobjede + t.GostujucePobjede) / (t.DomacePobjede + t.GostujucePobjede + t.GostujuciPorazi + t.DomaciPorazi)
                 }).ToList();
+                
 
                 return View(timoviKonacna);
             }

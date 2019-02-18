@@ -40,8 +40,34 @@ namespace Rezultati.Controllers
                     DrugaCetvrtinaGost = u.DrugaCetvrtinaGost,
                     TrecaCetvrtinaGost = u.TrecaCetvrtinaGost,
                     CetvrtaCetvrtinaGost = u.CetvrtaCetvrtinaGost,
-                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost
+                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost,
+                    IgraciDomaci = context.Igrac.Where(i => i.TimId == u.DomaciTimId).Select(i => new IgracViewModel() {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList(),
+                    IgraciGosti = context.Igrac.Where(i => i.TimId == u.GostujuciTimId).Select(i => new IgracViewModel()
+                    {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList()
+
+
                 }).ToList();
+                
                 return PartialView("_Utakmice", utakmice);
             }
 
@@ -100,7 +126,31 @@ namespace Rezultati.Controllers
                     DrugaCetvrtinaGost = u.DrugaCetvrtinaGost,
                     TrecaCetvrtinaGost = u.TrecaCetvrtinaGost,
                     CetvrtaCetvrtinaGost = u.CetvrtaCetvrtinaGost,
-                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost
+                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost,
+                    IgraciDomaci = context.Igrac.Where(i => i.TimId == u.DomaciTimId).Select(i => new IgracViewModel()
+                    {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList(),
+                    IgraciGosti = context.Igrac.Where(i => i.TimId == u.GostujuciTimId).Select(i => new IgracViewModel()
+                    {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList()
                 }).ToList();
                 return PartialView("_Utakmice", utakmice);
 
@@ -174,7 +224,31 @@ namespace Rezultati.Controllers
                     DrugaCetvrtinaGost = u.DrugaCetvrtinaGost,
                     TrecaCetvrtinaGost = u.TrecaCetvrtinaGost,
                     CetvrtaCetvrtinaGost = u.CetvrtaCetvrtinaGost,
-                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost
+                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost,
+                    IgraciDomaci = context.Igrac.Where(i => i.TimId == u.DomaciTimId).Select(i => new IgracViewModel()
+                    {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList(),
+                    IgraciGosti = context.Igrac.Where(i => i.TimId == u.GostujuciTimId).Select(i => new IgracViewModel()
+                    {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList()
                 }).ToList();
                 return PartialView("_Utakmice", utakmice);
 
@@ -204,12 +278,125 @@ namespace Rezultati.Controllers
                     DrugaCetvrtinaGost = u.DrugaCetvrtinaGost,
                     TrecaCetvrtinaGost = u.TrecaCetvrtinaGost,
                     CetvrtaCetvrtinaGost = u.CetvrtaCetvrtinaGost,
-                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost
+                    PoeniGost = u.PrvaCetvrtinaGost + u.DrugaCetvrtinaGost + u.TrecaCetvrtinaGost + u.CetvrtaCetvrtinaGost,
+                    IgraciDomaci = context.Igrac.Where(i => i.TimId == u.DomaciTimId).Select(i => new IgracViewModel()
+                    {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList(),
+                    IgraciGosti = context.Igrac.Where(i => i.TimId == u.GostujuciTimId).Select(i => new IgracViewModel()
+                    {
+                        IgracId = i.IgracId,
+                        Ime = i.Ime,
+                        Prezime = i.Prezime,
+                        DatumRodjenja = i.DatumRodjenja,
+                        MjestoRodjenja = i.MjestoRodjenja,
+                        BrojDresa = i.BrojDresa,
+                        TimId = i.TimId,
+                        Tim = i.Tim.Grad + " " + i.Tim.Naziv,
+                        Pozicija = i.Pozicija
+                    }).ToList()
                 }).ToList();
                 return PartialView("_Utakmice", utakmice);
             }
         }
 
+        public JsonResult PlayerStat(int IgracId, int UtakmicaId)
+        {
+            using (var context = new RezultatiEntities())
+            {
+                var statistika = context.UcinakIgraca.Where(u => u.UtakmicaId == UtakmicaId && u.IgracId == IgracId).ToList();
+                
+                if (statistika.Count == 0)
+                {
+                    UcinakIgraca novaStatistika = new UcinakIgraca() {
+                        IgracId = IgracId,
+                        UtakmicaId = UtakmicaId,
+                        Blokovi = 0,
+                        BrojAsistencija = 0,
+                        BrojMinuta = 0,
+                        BrojPoena = 0,
+                        BrojSkokova = 0,
+                        IzgubljeneLopte = 0,
+                        LicneGreske = 0,
+                        PogodjenaBacanja = 0,
+                        PogodjeniSutevi = 0,
+                        PogodjeniZaTri = 0,
+                        PokusajiIzIgre = 0, 
+                        SlobodnaBacanja = 0,
+                        SuteviZaTri = 0,
+                        UkradeneLopte = 0
+                    };
+                    var dodajStatistiku = context.UcinakIgraca.Add(novaStatistika);
+                    context.SaveChanges();
+
+                    return new JsonResult() { Data = novaStatistika, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                else
+                {
+                    int statId = statistika[0].UcinakId;
+                    UcinakIgraca novaStatistika = context.UcinakIgraca.Find(statId);
+                    UcinakViewModel dodajStat = new UcinakViewModel()
+                    {
+                        UcinakId = novaStatistika.UcinakId,
+                        IgracId = novaStatistika.IgracId,
+                        UtakmicaId = novaStatistika.UtakmicaId,
+                        Blokovi = novaStatistika.Blokovi,
+                        BrojAsistencija = novaStatistika.BrojAsistencija,
+                        BrojMinuta = novaStatistika.BrojMinuta,
+                        BrojPoena = novaStatistika.BrojPoena,
+                        BrojSkokova = novaStatistika.BrojSkokova,
+                        IzgubljeneLopte = novaStatistika.IzgubljeneLopte,
+                        LicneGreske = novaStatistika.LicneGreske,
+                        PogodjenaBacanja = novaStatistika.PogodjenaBacanja,
+                        PogodjeniSutevi = novaStatistika.PogodjeniSutevi,
+                        PogodjeniZaTri = novaStatistika.PogodjeniZaTri,
+                        PokusajiIzIgre = novaStatistika.PokusajiIzIgre,
+                        SlobodnaBacanja = novaStatistika.SlobodnaBacanja,
+                        SuteviZaTri = novaStatistika.SuteviZaTri,
+                        UkradeneLopte = novaStatistika.UkradeneLopte,
+                        ImeIgraca = novaStatistika.Igrac.Ime + " " + novaStatistika.Igrac.Prezime,
+                        Tim = novaStatistika.Igrac.Tim.Naziv
+                    };
+
+
+                    return new JsonResult() { Data = dodajStat, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+            }
+        }
+        public JsonResult AddStat(int UcinakId, short Blokovi, short BrojAsistencija, short BrojMinuta, short BrojPoena, short BrojSkokova, short IzgubljeneLopte, short LicneGreske, 
+            short PogodjenaBacanja, short PogodjeniSutevi, short PogodjeniZaTri, short PokusajiIzIgre,  short SlobodnaBacanja, short SuteviZaTri, short UkradeneLopte)
+        {
+            using (var context = new RezultatiEntities())
+            {
+                var pronadjiStat = context.UcinakIgraca.Find(UcinakId);
+                
+                pronadjiStat.Blokovi = Blokovi;
+                pronadjiStat.BrojAsistencija = BrojAsistencija;
+                pronadjiStat.BrojMinuta = BrojMinuta;
+                pronadjiStat.BrojPoena = BrojPoena;
+                pronadjiStat.BrojSkokova = BrojSkokova;
+                pronadjiStat.IzgubljeneLopte = IzgubljeneLopte;
+                pronadjiStat.LicneGreske = LicneGreske;
+                pronadjiStat.PogodjenaBacanja = PogodjenaBacanja;
+                pronadjiStat.PogodjeniSutevi = PogodjeniSutevi;
+                pronadjiStat.PogodjeniZaTri = PogodjeniZaTri;
+                pronadjiStat.PokusajiIzIgre = PokusajiIzIgre;
+                pronadjiStat.SlobodnaBacanja = SlobodnaBacanja;
+                pronadjiStat.SuteviZaTri = SuteviZaTri;
+                pronadjiStat.UkradeneLopte = UkradeneLopte;
+                context.SaveChanges();
+            }
+
+            return new JsonResult() { Data = "success" };
+        }
 
     }
 }

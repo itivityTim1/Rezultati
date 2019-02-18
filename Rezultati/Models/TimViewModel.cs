@@ -26,5 +26,6 @@ namespace Rezultati.Models
         public int? PrimljeniKoseviDomaci { get; set; }
         public int? PrimljeniKoseviGostujuci { get; set; }
         public double? ProcentPobijeda { get; set; }
+        public List<IgracViewModel> Igraci { get; set; }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model Rezultati.Models.TimViewModel
+@{
+    ViewBag.Title = "TeamDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TeamDetails</h2>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+</div>
+
+
+<div class="row">
+    <table id="igraci-tima" class="table table-hover table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Broj Dresa</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Pozicija</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Igraci)
+            {
+                <tr>
+                    <td>@item.BrojDresa</td>
+                    <td>@item.Ime</td>
+                    <td>@item.Prezime</td>
+                    <td>@item.Pozicija</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
