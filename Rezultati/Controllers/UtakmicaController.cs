@@ -73,6 +73,20 @@ namespace Rezultati.Controllers
 
         }
 
+        public JsonResult GetDates()
+        {
+            using(var context = new RezultatiEntities())
+            {
+                var getDate = context.Utakmica.Select(u => u.DatumOdigravanja).ToList();
+                var shortDate = getDate.Select(u => u.ToShortDateString()).ToList();
+                var shortDates = getDate.Select(u => u.ToString("yyyy-MM-dd")).ToList();
+                List<string> datumi = shortDates;
+
+                return new JsonResult() { Data = datumi, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            
+        }
+
         public JsonResult ListaTimova()
         {
             using (var context = new RezultatiEntities())

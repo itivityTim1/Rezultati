@@ -354,6 +354,7 @@
     <Content Include="Scripts\Site\dodajIgraca.js" />
     <Content Include="Scripts\Site\igraciTabela.js" />
     <Content Include="Scripts\Site\pregled.js" />
+    <Content Include="Scripts\Site\pregledUtakmica.js" />
     <Content Include="Scripts\Site\tabelaTimovi.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
